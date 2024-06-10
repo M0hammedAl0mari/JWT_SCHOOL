@@ -1,0 +1,37 @@
+﻿@model IEnumerable<lastTest.Models.StudentCourse>
+
+@{
+    ViewData["Title"] = "My Courses";
+}
+
+<h1>My Courses</h1>
+
+<p>
+    <a asp-action="RegisterCourses">Register New Courses</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Course.Name</td>
+                <td>@item.Course.Description</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="courseId" value="@item.CourseId" />
+                        <input type="hidden" name="userId" value="@item.UserId" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

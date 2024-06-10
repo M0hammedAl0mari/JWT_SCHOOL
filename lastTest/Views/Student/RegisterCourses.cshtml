@@ -1,0 +1,27 @@
+﻿@model lastTest.Models.RegisterCoursesViewModel
+
+@{
+    ViewData["Title"] = "Register Courses";
+}
+
+<h1>Register Courses</h1>
+
+<form asp-action="RegisterCourses" method="post">
+    <div class="form-group">
+        @foreach (var course in Model.AllCourses)
+        {
+            var isChecked = Model.RegisteredCourseIds.Contains(course.CourseId) ? "checked" : "";
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="selectedCourseIds" value="@course.CourseId" id="course_@course.CourseId" @isChecked />
+                <label class="form-check-label" for="course_@course.CourseId">
+                    @course.Name - @course.Description
+                </label>
+            </div>
+        }
+    </div>
+    <input type="submit" value="Register" class="btn btn-primary" />
+</form>
+
+<div>
+    <a asp-action="Index">Back to My Courses</a>
+</div>
